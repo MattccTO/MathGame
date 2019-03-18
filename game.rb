@@ -12,23 +12,47 @@ class Game
   end
 
   def play
-    current_player = @turn.current_player
-    question = Question.new
-    header("Turn: #{@turn.current_turn} - Player: #{current_player.name}")
+    while (not is_over?)
+      current_player = @turn.current_player
+      question = Question.new
 
-    puts "#{current_player.name}:" + question.get_question
-    player_answer = gets.chomp.to_i
+      puts header("Turn: #{@turn.current_turn} - Player: #{current_player.name}")
 
-    if (player_answer == question.get_answer)
-      puts "CORRECT!"
-    else
-      puts "WRONG!"
+      puts "#{current_player.name}:" + question.get_question
+      player_answer = gets.chomp.to_i
+
+      if (player_answer == question.get_answer)
+        puts "#{current_player.name}: CORRECT!"
+      else
+        puts "#{current_player.name}: WRONG!"
+        current_player.lose_life
+      end
+
+      puts get_score
+
+      @turn.next_turn
     end
+
+    puts "#{alive_players[0].name} wins with a score of #{alive_players[0].current_lives}/3"
+
+    puts header("Game Over!")
   end
 
   private
 
   def header(message)
-    puts "+++++-----#{message}-----+++++"
+    "+++++-----#{message}-----+++++"
+  end
+
+  def get_score
+    "#{@players[0].name}: #{@players[0].current_lives}/3  vs  #{@players[1].name}: #{@players[1].current_lives}/3"
+  end
+
+  def alive_players
+    @players.select { |player| not player.is_dead? }
+  end
+
+  def is_over?
+    alive_players.count == 1
   end
 end

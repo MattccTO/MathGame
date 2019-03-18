@@ -9,4 +9,8 @@ class Turn
   def current_player
     @players[@current_turn % 2]
   end
+
+  def next_turn
+    @current_turn += 1
+  end
 end
