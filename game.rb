@@ -3,9 +3,9 @@ require_relative 'question'
 require_relative 'player'
 
 class Game
-  def initialize
-    player1 = Player.new('Player 1')
-    player2 = Player.new('Player 2')
+  def initialize(name1, name2)
+    player1 = Player.new(name1)
+    player2 = Player.new(name2)
 
     @players = [player1, player2]
     @turn = Turn.new(@players)
