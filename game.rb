@@ -22,13 +22,13 @@ class Game
       puts get_score
       puts
 
-      puts "#{current_player.name}:" + question.get_question
+      puts "#{current_player.name}: " + question.get_question
       player_answer = gets.chomp.to_i
 
       if (player_answer == question.get_answer)
-        puts "#{current_player.name}: CORRECT!"
+        puts "#{current_player.name}> CORRECT!"
       else
-        puts "#{current_player.name}: WRONG!"
+        puts "#{current_player.name}> WRONG!"
         current_player.lose_life
       end
 
