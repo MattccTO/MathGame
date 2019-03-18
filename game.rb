@@ -16,7 +16,11 @@ class Game
       current_player = @turn.current_player
       question = Question.new
 
+      puts
       puts header("Turn: #{@turn.current_turn} - Player: #{current_player.name}")
+      puts
+      puts get_score
+      puts
 
       puts "#{current_player.name}:" + question.get_question
       player_answer = gets.chomp.to_i
@@ -28,14 +32,14 @@ class Game
         current_player.lose_life
       end
 
-      puts get_score
-
       @turn.next_turn
     end
 
+    puts
     puts "#{alive_players[0].name} wins with a score of #{alive_players[0].current_lives}/3"
-
+    puts
     puts header("Game Over!")
+    puts
   end
 
   private
